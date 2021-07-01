@@ -1,5 +1,7 @@
 ![Logo of the project](./data/media/image/Logo.svg)
 
+[untitled](./data/introduction/Untitled 1.pdf)
+
 # DDN LLC: [Сепулькарий](./data/introduction/Task_1-Introduction.svg)
 > Нужно написать библиотеку сепулькарий со следующими методами: - получить
 > сепульку (объект) - добавить сепульку в хранилище - получить список всех
