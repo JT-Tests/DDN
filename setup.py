@@ -63,7 +63,9 @@ class PostInstallCommand(install):
 
 
 # Get the long description from the README file
-with open(base_dir / 'README.md', encoding='utf-8') as f:
+with open(base_dir / 'data/introduction/Task_1-Introduction.txt',
+          encoding='utf-8') as f:
+
     long_description = f.read()
 
 
@@ -76,14 +78,14 @@ setup(
     # package, this name will be registered for you. It will determine how
     # users can install this project, e.g.:
     #
-    # $ pip install sampleproject
+    # $ pipenv install sample_module
     #
     # And where it will live on PyPI: https://pypi.org/project/sampleproject/
     #
     # There are some restrictions on what makes a valid project name
     # specification here:
     # https://packaging.python.org/specifications/core-metadata/#name
-    name='Arfa_Med-WebSite',  # Required
+    name='DDN_LLC-Task: Sepulcarium',  # Required
 
     # Versions should comply with PEP 440:
     # https://www.python.org/dev/peps/pep-0440/
@@ -96,19 +98,19 @@ setup(
 
     # This should be your name or the name of the organization which owns the
     # project.
-    author="IT Masters",  # Optional
+    author="Janik Tarverdyan",  # Optional
 
     # This should be a valid email address corresponding to the author listed
     # above.
-    author_email="support.arfa-med.llc@it-masters.llc",  # Optional
+    author_email="Janik.Tarverdyan@gmail.com",  # Optional
 
-    maintainer='Aram Simonyan',
-    maintainer_email='aram.simonyan.03@gmail.com',
+    maintainer='Mikhail Belokopytov',
+    maintainer_email='mbelokopytov@ddn.com',
 
     # This is a one-line description or tagline of what your project does. This
     # corresponds to the "Summary" metadata field:
     # https://packaging.python.org/specifications/core-metadata/#summary
-    description="For business company Arfa-Med LLC",  # Optional
+    description="This is a test task",  # Optional
 
     # This is an optional longer description of your project that represents
     # the body of text which users will see when they visit PyPI.
@@ -192,11 +194,10 @@ setup(
     # maintainers, and where to support the project financially. The key is
     # what's used to render the link text on PyPI.
     project_urls={
-        'Bug Reports': 'https://github.com/pypa/sampleproject/issues',
+        'Bug Reports': 'https://github.com/JT-Tests/DDN/issues',
         'Funding': 'https://donate.pypi.org',
-        'Say Thanks!': 'http://saythanks.io/to/example',
-        'Source': 'https://github.com/pypa/sampleproject/',
-            },
+        'Source': 'https://cutt.ly/9mhUbby'
+        },
 
     classifiers=[  # Optional
         # How mature is this project? Common values are
