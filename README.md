@@ -1,6 +1,6 @@
 ![Logo of the project](./data/media/image/Logo.svg)
 
-# DDN LLC: [Сепулькарий](./data/introduction/Task_1-Introduction.pdf)
+# [DDN LLC](https://ddn.com): [Сепулькарий](./data/introduction/Task_1-Introduction.pdf)
 > Нужно написать библиотеку сепулькарий со следующими методами: - получить 
 > сепульку (объект) - добавить сепульку в хранилище - получить список всех
 > сепулек (фильтры не нужны) - удалить сепульку - обновить сепульку id
