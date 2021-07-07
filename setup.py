@@ -3,7 +3,12 @@
 
 # setup.py
 #
-# Copyright 2021 Janik Tarverdyan <Janik.Tarverdyan@gmail.com>
+# The setup script is the centre of all activity in building, distributing and
+# installing modules using the Distutils, so that the various commands that
+# operate on your modules do the right thing.
+# See https://cutt.ly/smbaTl8
+#
+# Copyright (c) 2021 Janik Tarverdyan <Janik.Tarverdyan@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -30,6 +35,7 @@ See:
 
 
 import pathlib
+import sysconfig
 import subprocess
 # Always prefer setuptools over distutils
 from setuptools import setup, find_packages
@@ -44,6 +50,26 @@ base_dir = pathlib.Path(__file__).parent
 
 pipenv_command = ['pipenv', 'install']
 pipenv_command_dev = ['pipenv', 'install', '--dev']
+
+
+_DEBUG = False
+# Generally I write code so that if DEBUG is defined as 0 then all
+# optimisations are off and asserts are enabled. Typically run times of these
+# builds are x2 to x10 release builds.
+#
+# If DEBUG > 0 then extra code paths are introduced such as checking the
+# integrity of internal data structures. In this case the performance is by no
+# means comparable with release builds.
+_DEBUG_LEVEL = 0
+
+# Common flags for both release and debug builds.
+extra_compile_args = sysconfig.get_config_var('CFLAGS').split()
+extra_compile_args += ["-std=c++11", "-Wall", "-Wextra"]
+if _DEBUG:
+    extra_compile_args += ["-g3", "-O0",
+                           "-DDEBUG=%s" % _DEBUG_LEVEL, "-UNDEBUG"]
+else:
+    extra_compile_args += ["-DNDEBUG", "-O3"]
 
 
 class PostDevelopCommand(develop):
@@ -72,7 +98,6 @@ with open(base_dir / 'data/introduction/Task_1-Introduction.txt',
 # Arguments marked as "Required" below must be included for upload to PyPI.
 # Fields marked as "Optional" may be commented out.
 
-
 setup(
     # This is the name of your project. The first time you publish this
     # package, this name will be registered for you. It will determine how
@@ -85,7 +110,7 @@ setup(
     # There are some restrictions on what makes a valid project name
     # specification here:
     # https://packaging.python.org/specifications/core-metadata/#name
-    name='DDN_LLC-Task: Sepulcarium',  # Required
+    name='Sepulcarium',  # Required
 
     # Versions should comply with PEP 440:
     # https://www.python.org/dev/peps/pep-0440/
@@ -110,7 +135,11 @@ setup(
     # This is a one-line description or tagline of what your project does. This
     # corresponds to the "Summary" metadata field:
     # https://packaging.python.org/specifications/core-metadata/#summary
-    description="This is a test task",  # Optional
+    description="""
+    Sepulkarium library: Before installing the library it's necessary to create
+                         virtualenv on the machine after activate installed env
+                         and install Sepulkarium library
+    """,  # Optional
 
     # This is an optional longer description of your project that represents
     # the body of text which users will see when they visit PyPI.
@@ -132,20 +161,20 @@ setup(
     #
     # This field corresponds to the "Description-Content-Type" metadata field:
     # https://cutt.ly/hbJmlpZ
-    long_description_content_type='text/markdown',  # Optional (see note above)
+    long_description_content_type='text/plain',  # Optional (see note above)
 
     # This should be a valid link to your project's main homepage.
     #
     # This field corresponds to the "Home-Page" metadata field:
     # https://cutt.ly/JvVwE4t
     # url='https://github.com/pypa/sampleproject',  # Optional
-    url="https://gitlab.com/arfa-med/WebSite.git",  # Optional
+    url="https://cutt.ly/7mbfZWY",  # Optional
 
     # This field adds keywords for your project which will appear on the
     # project page. What does your project relate to?
     #
     # Note that this is a string of words separated by whitespace, not a list.
-    # keywords='sample setuptools development web database model business',  #
+    # keywords='sample setuptools development web database model business',
     # Optional
 
 
@@ -159,13 +188,15 @@ setup(
     #   py_modules=["my_module"],
     #
     # packages=find_packages(exclude=['tests', 'contrib', 'docs', 'tests']),
+    packages=find_packages('Sepulkarium'),
+    package_dir={'Sepulcarium': './'},
 
     # Specify which Python versions you support. In contrast to the
     # 'Programming Language' classifiers above, 'pip install' will check this
     # and refuse to install the project if the version does not match. If you
     # do not support Python 2, you can simplify this to '>=3.5' or similar, see
     # https://cutt.ly/rvVuw08
-    # python_requires='>=3.5',
+    python_requires='>=3.5',
 
     # This field lists other packages that your project depends on to run.
     # Any package you put here will be installed by pip when your project is
@@ -174,15 +205,14 @@ setup(
     # For an analysis of "install_requires" vs pip's requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
     # install_requires=['peppercorn'],  # Optional
-
-        platforms=['Linux', 'FreeBSD'],
-        license='GPLv3',
+    platforms=['Linux', 'FreeBSD'],
+    license='GPLv3',
 
     setup_requires=['setuptools_scm'],
     cmdclass={
         'develop': PostDevelopCommand,
         'install': PostInstallCommand,
-            },
+    },
 
     # List additional URLs that are relevant to your project as a dict.
     #
@@ -197,7 +227,7 @@ setup(
         'Bug Reports': 'https://github.com/JT-Tests/DDN/issues',
         'Funding': 'https://donate.pypi.org',
         'Source': 'https://cutt.ly/9mhUbby'
-        },
+    },
 
     classifiers=[  # Optional
         # How mature is this project? Common values are
@@ -219,5 +249,5 @@ setup(
         # These classifiers are *not* checked by 'pip install'. See instead
         # 'python_requires' below.
         'Programming Language :: Python :: 3.9',
-            ],
+    ],
 )

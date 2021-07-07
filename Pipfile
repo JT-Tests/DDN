@@ -4,12 +4,12 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-flask = "*"
 
 [dev-packages]
 ipython = "*"
 pep8 = "*"
 autopep8 = "*"
+bpython = "*"
 
 [requires]
 python_version = "3.9"
