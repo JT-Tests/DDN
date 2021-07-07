@@ -39,6 +39,7 @@
 # ide config file
 .dbeaver-data-sources*.xml
 
+
 ### dotenv ###
 .env
 
