@@ -24,8 +24,8 @@
 
 
 """
-    lib.storage
-    ~~~~~~~~~~~
+    core.storage
+    ~~~~~~~~~~~~
 
     The storage for saving and removing sepulcas. Storage works automatically
     when add, edit or remove any sepulca.
@@ -37,40 +37,53 @@
 """
 
 
+import json
+import base64
+from datetime import date
+from .settings import DB_PATH
+
+
 # Storage works with local, it means not working and configured with popular
 # databases by default, but it's possible for using all popular databases
 # programmes like SQL Family and No SQL like MongoDB if necessary.
 #
 # See about classes: https://cutt.ly/EmmZima
-class Storage(object):
+class __Storage(object):
     """
     Storage none includes DB programmes by default. It's save data into the
     local. Local DB format by default is "JSON" (JavaScript Object Notation).
     """
 
-    def __init__(self, *args, **kwargs):
+    @classmethod
+    def __add__(self, **kwargs):
         """
-        pass
+        Add entries to the database
         """
-        super().__init__(*args, **kwargs)
+        return kwargs
 
-    def __get__(self, *args, **kwargs):
+    @classmethod
+    def __get__(*args, **kwargs):
         """
         Get all sepulcas from the storage
         """
-        pass
+        self.args = args
+        self.kwargs = kwargs
 
-    def __remove__(self):
+    @classmethod
+    def __delete__(id=None, *args, **kwargs):
         """
         Documentation remove method
         """
         pass
 
-    def __edit__(self):
+    @classmethod
+    def __edit__(id=None, *args, **kwargs):
         """
         Documentation edit method
         """
         pass
+
+    # def dump(self, )
 
     # Flag names are globally defined!  So in general, we need to be careful to
     # pick names that are unlikely to be used by other libraries. If there is a
@@ -162,4 +175,61 @@ class Storage(object):
             flags.DEFINE_enum('job', 'running',
                               ['running', 'stopped'], 'Job status.')
         """
-        Flags = {}
+        pass
+
+
+class JSON_DB(__Storage):
+    """ Default JSON database
+
+    @methods dumps(), loads()
+    """
+
+    def __init__(self, database=''):
+        """
+        If database isn't exists create a new database otherwise working with
+        the current database. Also have a method create a database if necessary
+        """
+
+        if database == '':
+            self.name = 'Sepulkarium'
+
+            db_path = DB_PATH / f"{self.name}.json"
+
+            if db_path.is_file() is False:
+                db_path.touch()
+        else:
+            db_path = DB_PATH / f"{database}.json"
+
+            if db_path.is_file() is False:
+                db_path.touch()
+
+            self.name = database
+
+    @classmethod
+    def schema(cls, default=True, custom=False):
+        """
+        schema for the database Sepulkarium
+        """
+        pass
+
+    def write(**kwargs):
+        return kwargs
+
+    @classmethod
+    def dumps(cls, value, *args, **kwargs):
+        """Dumps the python value into a JSON string"""
+        return json.dumps(value)
+
+    @classmethod
+    def loads(cls, value):
+        """Parses the JSON string and returns the corresponding python value"""
+        return json.loads(value)
+
+
+class History(object):
+    """
+    This is a class for the history each record
+
+    @metho get()
+    """
+    pass

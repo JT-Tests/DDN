@@ -23,8 +23,8 @@
 
 
 """
-    lib.__init__
-    ~~~~~~~~~~~~
+    core.__init__
+    ~~~~~~~~~~~~~
 
     Sepulkarium is the main library it's include all methods and configurations
 
@@ -38,6 +38,7 @@ class Sepulkarium(object):
     """Docstring for Sepulkarium. """
 
     __classname__ = 'Sepulkarium'
+    __library_name__ = __classname__
 
     def __init__(self, function):
         """TODO: to be defined. """

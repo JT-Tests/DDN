@@ -137,7 +137,7 @@ setup(
     # https://packaging.python.org/specifications/core-metadata/#summary
     description="""
     Sepulkarium library: Before installing the library it's necessary to create
-                         virtualenv on the machine after activate installed env
+                         virtualenv on the machine, then activate installed env
                          and install Sepulkarium library
     """,  # Optional
 
